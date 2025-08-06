@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Meta setup for proper character encoding and responsive layout -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Slider Challenge</title>
+
+  <!-- Tailwind CSS CDN for utility-based styling -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Roboto and Roboto Mono for body and button text -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* Base font setup */
+    body {
+      font-family: 'Roboto', sans-serif;
+    }
+
+    /* Padding on top for desktop spacing */
+    .top-space {
+      padding-top: 100px;
+    }
+
+    /* Cursor pointer for interactive elements */
+    .pointer {
+      cursor: pointer;
+    }
+
+    /* Right margin for the left content on desktop */
+    .left-content {
+      margin-right: 60px;
+      padding-left: 1rem;
+    }
+
+    /* Heading Top spacing*/
+    .heading {
+      padding-top: 45px;
+    }
+
+    /* Hide mobile arrows by default */
+    .mobile-arrows {
+      display: none;
+    }
+
+    /* Show desktop arrows by default */
+    .desktop-arrows {
+      display: flex;
+    }
+
+    /* Highlight the active dot */
+    .slider-dot.active {
+      background-color: white;
+    }
+
+    /* Wrapper for controlling slider height/width */
+    .slider-wrapper {
+      position: relative;
+      height: 473px;
+      width: 100%;
+    }
+
+    /* Horizontal scroll setup for slider */
+    #slider {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+      gap: 30px;
+    }
+
+    /* Each slide takes full width minus spacing */
+    .slide {
+      flex: 0 0 calc(100% - 60px);
+      height: 473px;
+    }
+
+    /* Image inside each slide is responsive with rounded corners */
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    /* Responsive styles for tablet/mobile */
+    @media (max-width: 768px) {
+      /* Stack layout vertically */
+      .responsive-flex {
+        flex-direction: column;
+      }
+
+      /* Hide desktop arrows */
+      .desktop-arrows {
+        display: none;
+      }
+
+      /* Show mobile buttons and spacing */
+      .flex-mobile {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1.5rem;
+      }
+
+      /* Heading Top spacing to 0 */
+      .heading {
+        padding-top: 0px;
+      }
+
+      /* Remove side margin for smaller screens */
+      .left-content {
+        margin-right: 0px;
+      }
+
+      /* Display arrows on mobile */
+      .mobile-arrows {
+        display: flex;
+      }
+
+      /* Remove top padding for mobile */
+      .top-space {
+        padding-top: 0;
+      }
+
+      /* Add space between stacked blocks */
+      .responsive-flex > div {
+        margin-bottom: 2rem;
+      }
+
+      /* Allow slider to auto-size in height */
+      .slider-wrapper {
+        height: 100%;
+      }
+
+      /* Full width slides on mobile */
+      .slide {
+        flex: 0 0 100%;
+        height: 100%;
+      }
+
+      /* Smaller spacing between slides on mobile */
+      #slider {
+        gap: 16px;
+      }
+
+      /* Add internal padding on mobile */
+      .responsive-space {
+        padding: 2rem;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-gradient-to-r from-orange-500 to-yellow-400 responsive-space">
+  <div class="min-h-screen top-space">
+    <div class="bg-transparent md:flex items-center flex justify-end responsive-flex">
+      
+      <!-- =========================
+           LEFT COLUMN: Text + Arrows + CTA
+      ========================== -->
+      <div class="left-content flex-1 max-w-[298px]">
+        <div class="text-white overflow-hidden">
+
+          <!-- Desktop Arrow Buttons -->
+          <div class="desktop-arrows space-x-6 md:justify-start">
+            <button id="prev" class="bg-blue-900 w-8 h-8 flex items-center justify-center rounded-full">
+              <img src="./Assets/arrow.svg" alt="left arrow" class="w-5 h-5 -scale-x-100">
+            </button>
+            <button id="next" class="bg-blue-900 w-8 h-8 flex items-center justify-center rounded-full">
+              <img src="./Assets/arrow.svg" alt="right arrow" class="w-5 h-5">
+            </button>
+          </div>
+
+          <!-- Headline -->
+          <h1 class="font-bold text-[46px] leading-[43px] tracking-[-0.02em] heading">
+            The Roberts<br />Family’s Story
+          </h1>
+
+          <!-- Description Paragraph -->
+          <p class="font-normal text-[16px] leading-[23px]" style="margin-top: 24px; margin-bottom: 42px;">
+            The circumstances that might lead to homelessness can include loss of income or transportation, a falling out with loved ones, or an abrupt economic downturn. For Brandon and Jennifer, it was all of these things.
+          </p>
+
+          <!-- CTA Button + Mobile Arrows -->
+          <div class="flex-mobile">
+            <button class="inline-flex items-center bg-yellow-300 text-black px-8 py-4 rounded-[34px] font-['Roboto_Mono'] font-medium text-base hover:bg-yellow-200 transition leading-none">
+              More Client Stories <img src="./Assets/button-arrow.svg" class="ml-2.5" alt="right-arrow">
+            </button>
+
+            <!-- Mobile Arrow Buttons -->
+            <div class="mobile-arrows space-x-6 md:justify-start">
+              <button id="prev-mobile" class="bg-blue-900 w-8 h-8 flex items-center justify-center rounded-full">
+                <img src="./Assets/arrow.svg" alt="left arrow" class="w-5 h-5 -scale-x-100">
+              </button>
+              <button id="next-mobile" class="bg-blue-900 w-8 h-8 flex items-center justify-center rounded-full">
+                <img src="./Assets/arrow.svg" alt="right arrow" class="w-5 h-5">
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- =========================
+           RIGHT COLUMN: Image Slider
+      ========================== -->
+      <div class="flex-1 flex flex-col items-start max-w-[1000px]">
+        <div class="slider-wrapper rounded-lg overflow-x-hidden">
+          <div id="slider">
+            <!-- Each Slide -->
+            <div class="slide"><img src="./Assets/placeholder-video.png" alt="Family sitting together"></div>
+            <div class="slide"><img src="./Assets/Video 2.png" alt="Second story"></div>
+            <div class="slide"><img src="./Assets/Video 3.png" alt="Third story"></div>
+          </div>
+        </div>
+
+        <!-- Navigation Dots -->
+        <div class="flex space-x-2 mt-[39px] justify-center md:justify-start">
+          <div class="pointer w-3 h-3 bg-white/60 rounded-full slider-dot"></div>
+          <div class="pointer w-3 h-3 bg-white/60 rounded-full slider-dot"></div>
+          <div class="pointer w-3 h-3 bg-white/60 rounded-full slider-dot"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================
+       JAVASCRIPT FUNCTIONALITY
+  ========================== -->
+  <script>
+    // DOM Elements
+    const slider = document.getElementById("slider");
+    const slides = document.querySelectorAll(".slide");
+    const dots = document.querySelectorAll(".slider-dot");
+
+    const nextBtns = [
+      document.getElementById("next"),
+      document.getElementById("next-mobile"),
+    ];
+
+    const prevBtns = [
+      document.getElementById("prev"),
+      document.getElementById("prev-mobile"),
+    ];
+
+    let activeIndex = 0;
+
+    // Function to update slider position and active dot
+    function updateSlider(index) {
+      const gap = window.innerWidth <= 768 ? 16 : 30;
+      const offset = index * (slides[0].offsetWidth + gap);
+      slider.style.transform = `translateX(-${offset}px)`;
+      dots.forEach((dot, i) => {
+        dot.classList.toggle("active", i === index);
+      });
+    }
+
+    // Arrow button listeners (next)
+    nextBtns.forEach(btn => {
+      if (btn) {
+        btn.addEventListener("click", () => {
+          activeIndex = (activeIndex + 1) % slides.length;
+          updateSlider(activeIndex);
+        });
+      }
+    });
+
+    // Arrow button listeners (previous)
+    prevBtns.forEach(btn => {
+      if (btn) {
+        btn.addEventListener("click", () => {
+          activeIndex = (activeIndex - 1 + slides.length) % slides.length;
+          updateSlider(activeIndex);
+        });
+      }
+    });
+
+    // Dot navigation (click to navigate to a slide)
+    dots.forEach((dot, index) => {
+      dot.addEventListener("click", () => {
+        activeIndex = index;
+        updateSlider(activeIndex);
+      });
+    });
+
+    // =========================
+    // TOUCH / SWIPE FUNCTIONALITY FOR MOBILE
+    // =========================
+
+    let startX = 0;
+    let endX = 0;
+    const threshold = 50; // Minimum swipe distance to trigger action
+
+    const sliderWrapper = document.querySelector('.slider-wrapper');
+
+    function handleTouchStart(e) {
+      startX = e.touches[0].clientX;
+    }
+
+    function handleTouchMove(e) {
+      endX = e.touches[0].clientX;
+    }
+
+    function handleTouchEnd() {
+      if (window.innerWidth > 768) return; // Disable on desktop
+
+      const distance = endX - startX;
+
+      if (Math.abs(distance) > threshold) {
+        if (distance < 0) {
+          // Swipe left: go forward
+          activeIndex = (activeIndex + 1) % slides.length;
+        } else {
+          // Swipe right: go backward
+          activeIndex = (activeIndex - 1 + slides.length) % slides.length;
+        }
+        updateSlider(activeIndex);
+      }
+    }
+
+    // Attach swipe event listeners
+    sliderWrapper.addEventListener('touchstart', handleTouchStart, false);
+    sliderWrapper.addEventListener('touchmove', handleTouchMove, false);
+    sliderWrapper.addEventListener('touchend', handleTouchEnd, false);
+
+    // Update slider on window resize (maintains correct alignment)
+    window.addEventListener("resize", () => updateSlider(activeIndex));
+
+    // Initialize on load
+    updateSlider(activeIndex);
+  </script>
+</body>
+</html>
